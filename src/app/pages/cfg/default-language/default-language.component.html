@@ -1,0 +1,47 @@
+<div class="animated fadeIn">
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card mb-0">
+        <div class="card-body">
+          <table class="table table-bordered table-striped table-sm mb-0">
+            <thead>
+            <tr>
+              <th class="text-center" width="60">{{ 'APP.UI_IDX_NUMBER' | translate }}</th>
+              <th>{{ 'DEFAULT_LANGUAGE_PAGE.NAME' | translate }}</th>
+              <th class="text-center">{{ 'DEFAULT_LANGUAGE_PAGE.DEFAULT' | translate }}</th>
+              <th class="text-center">{{ 'APP.IS_ACTIVE' | translate }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let obj of languages; index as $i">
+              <td class="text-center">{{ $i + 1 }}</td>
+              <td>
+                <div class="border-lang"><i class="flag-icon flag-icon-{{ obj?.flag }}" title="{{obj?.flag}}"></i></div>{{obj.name}}
+              </td>
+              <td class="text-center">
+                <input class="pointer" type="radio" (click)="setDefaultLanguage(obj)" [id]="'rdo-' + obj.id" [value]="obj.id" [(ngModel)]="rdoSelected">
+              </td>
+              <td class="text-center">
+                <input class="pointer" type="checkbox" [id]="'chk-' + obj.id" (change)="setActiveLanguage(obj)" [(ngModel)]="obj.active">
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <!--/.col-->
+  </div>
+  <!--/.row-->
+
+  <div class="row">
+    <div class="col-12">
+      <button class="btn btn-sm btn-success" (click)="proccess()">
+        <i class="fa fa-file-o"></i> {{ 'APP.BUTTON_UPDATE' | translate }}
+      </button>
+    </div>
+  </div>
+
+</div>
+

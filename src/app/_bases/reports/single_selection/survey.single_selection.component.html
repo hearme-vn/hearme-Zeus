@@ -1,0 +1,75 @@
+<div class="row">
+  <!-- Chart for Number of feedbacks -->
+  <div class="col-md-6" *ngIf="report_data">
+    <app-numberchart
+      [data]="report_data.feedbackcount"
+      [label]="'REPORT.FEEDBACK_COUNT' | translate"
+      [options]="numberChartOptions">
+    </app-numberchart>
+  </div>
+
+  <!-- Chart type -->
+  <div class="col-md-6" *ngIf="report_data">
+    <app-numberchart
+      label="{{ 'SURVEY_PAGE.SURVEY_TYPE' | translate }}: {{'SURVEY_PAGE.TYPES.' + report_survey.type | translate }}"
+      [options]="numberChartOptions">
+    </app-numberchart>
+  </div>
+  <!-- factor list -->
+  <div class="col-md-12" *ngIf="rating_data">
+    <div class="card">
+      <div class="card-header">
+        <h6 class="card-title mb-2">{{ 'REPORT.FACTOR_LIST' | translate }}</h6>
+      </div>  
+      <table class="table table-striped table-sm">
+        <thead>
+          <tr>
+            <th>{{ 'SURVEY_PAGE.FACTOR_NAME' | translate }}</th>
+            <th>{{ 'REPORT.FEEDBACK_COUNT' | translate }}</th>
+            <th class="center_cell">#</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let factor of factor_data; let idx = index">
+            <td class="pointer">{{ factor.question }}</td>
+            <td class="pointer">{{ factor.count }}</td>
+            <td class="col-md-1 center_cell actions">
+              <input class="form-check-input" id="{{ factor.id }}" type="checkbox" (click)="factor_Click($event, factor, idx)">
+            </td>
+          </tr>
+        </tbody>
+      </table>        
+
+    </div>
+  </div>
+ 
+  <!-- Pie chart for scale rating proportions -->
+  <div class="col-md-6" *ngIf="rating_data">
+    <app-pie-chart 
+      [data]="rating_data.data"
+      [labels]="rating_data.labels"
+      [hm_options]="hmoptions_rating_proportions">
+    </app-pie-chart>
+  </div>
+  
+  <!-- Chart counting feedback by time line -->
+  <div class="col-md-6" *ngIf="count_by_time">
+    <app-line-chart 
+      [data]="count_by_time.datasets"
+      [labels]="count_by_time.labels"
+      [hm_options]="hmoptions_feedbackcount_bytime">
+    </app-line-chart>
+  </div>
+
+  <!-- Chart for satisfaction score by time line -->
+  <!-- <div class="col-md-6" *ngIf="score_by_time">
+    <app-line-chart 
+      [data]="score_by_time.datasets"
+      [labels]="score_by_time.labels"
+      [options]="lineChartOptions"
+      [hm_options]="hmoptions_score_bytime">
+    </app-line-chart>
+  </div>  
+ -->
+</div>
+

@@ -1,0 +1,11 @@
+<div class="chart-wrapper" [style]="containerStyle" *ngIf="chartModel && datasets && datasets.length">
+    <canvas baseChart class="innerClass"
+        [datasets]="chartModel.getDatasets()"
+        [labels]="chartModel.chartLabels"
+        [options]="chartModel.options"
+        [chartType]="chartModel.chartType"
+        [plugins]="chartModel.chartPlugins"
+        (chartHover)="chartHovered($event)"
+        (chartClick)="chartClicked($event)">
+    </canvas>
+</div>

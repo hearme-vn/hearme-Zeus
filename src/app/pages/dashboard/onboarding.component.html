@@ -1,0 +1,39 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="onboarding-header">
+            <div><img src="assets/img/onboarding/onboarding-header.png"></div>
+            <div class="content">
+              <p><b>{{ 'ONBOARDING_PAGE.HEADER' | translate }}</b></p>
+              <p>{{ 'ONBOARDING_PAGE.HEAD_CONTENT1' | translate }}<br/>
+                {{ 'ONBOARDING_PAGE.HEAD_CONTENT2' | translate }}</p>
+            </div>
+          </div>
+          <div class="onboarding-body">
+            <ul class="cfg-main">
+              <li [className]="isShowConfig['cfg1'] ? 'dropdown show' : 'dropdown'" (click)="showHideConfig('cfg1')"><label>1</label> {{ 'ONBOARDING_PAGE.CFG_SYSTEM' | translate }}</li>
+              <ul [className]="isShowConfig['cfg1'] ? 'cfg-sub show' : 'cfg-sub hide'">
+                <li class="linked"><label class="fa fa-check fa-lg"></label> {{ 'ONBOARDING_PAGE.CFG_ORG' | translate }}</li>
+                <li class="linked"><label class="fa fa-check fa-lg"></label> {{ 'ONBOARDING_PAGE.CFG_SURVEY' | translate }}</li>
+                <li class="linked"><label class="fa fa-check fa-lg"></label> {{ 'ONBOARDING_PAGE.CFG_TERMINAL_GROUP' | translate }}</li>
+                <li class="linked"><label class="fa fa-check fa-lg"></label> {{ 'ONBOARDING_PAGE.CFG_TERMINAL' | translate }}</li>
+              </ul>
+              <li [className]="isShowConfig['cfg2'] ? 'dropdown show' : 'dropdown'" (click)="showHideConfig('cfg2')"><label>2</label> {{ 'ONBOARDING_PAGE.CFG_APP' | translate }}</li>
+              <ul [className]="isShowConfig['cfg2'] ? 'cfg-sub show' : 'cfg-sub hide'">
+                <li><label class="fa fa-check fa-lg"></label> {{ 'ONBOARDING_PAGE.CFG_APP_MNG' | translate }}</li>
+                <li><label class="fa fa-check fa-lg"></label> {{ 'ONBOARDING_PAGE.CFG_APP_SURVEY' | translate }}</li>
+              </ul>
+              <li><label>3</label> {{ 'ONBOARDING_PAGE.RUN_ON_KIOSK' | translate }}</li>
+              <li><label>4</label> {{ 'ONBOARDING_PAGE.FOLLOW_UP_REPORTS' | translate }}</li>
+              <li><label>5</label> {{ 'ONBOARDING_PAGE.SYSTEM_INTEGRATION' | translate }}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--/.col-->
+  </div>
+  <!--/.row-->
+</div>

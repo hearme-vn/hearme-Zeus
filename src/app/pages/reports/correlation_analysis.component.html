@@ -1,0 +1,83 @@
+<div class="animated fadeIn">
+  <!--  Form for filtering data -->
+  <div class="card">
+    <div class="card-body">
+      <!-- Main survey selection -->
+      <div class="form-group row">
+        <label class="control-label text-blue col-md-3">{{ 'CORRELATION_ANALYSIS.STEP_1' | translate }}</label>
+        <survey-select class="col-md-6" name="mainSurvey" [filter]="main_survey_filter"
+          (change)="mainSurveyChange($event)" [(ngModel)]="selectedSurvey">
+        </survey-select>
+      </div>
+
+      <!-- Satisfaction index selection -->
+      <div class="form-group row" *ngIf="selectedSurvey">
+        <label class="control-label text-blue col-md-3">{{ 'CORRELATION_ANALYSIS.STEP_2' | translate }}</label>
+        <surveytree-select class="col-md-6" [config]="config" [buttonClass]="'btn-outline-primary'"
+          [root_survey_id]="selectedSurvey.id" (selectedChange)="onIndexSurveyChange($event)"
+          [filter]="index_survey_filter">
+        </surveytree-select>
+      </div>
+
+      <!-- Factor survey selection -->
+      <div class="form-group row" *ngIf="indexSurvey">
+        <label class="control-label text-blue col-md-3">{{ 'CORRELATION_ANALYSIS.STEP_3' | translate }}</label>
+        <surveytree-select class="col-md-6" [config]="config" [child_surveys]="child_surveys" 
+          [buttonClass]="'btn-outline-primary'" [root_survey_id]="selectedSurvey.id" 
+          (selectedChange)="onFactorSurveyChange($event)" [filter]="factor_survey_filter">
+        </surveytree-select>
+      </div>
+
+      <!-- Time conditions - SUSPENDING -->
+      <div class="form-group row" *ngIf="factorSurvey">
+        <!-- <label class="control-label text-blue col-md-3">{{ 'CORRELATION_ANALYSIS.TIME' | translate }}</label> -->
+<!-- 
+        <select class="form-control" name="type" [(ngModel)]="form_filter.time.time_unit">
+          <option *ngFor="let item of SEARCH_TIME" [value]="item.key">
+            {{ item.name | translate }}
+          </option>
+        </select>
+ -->
+<!-- 
+        <select class="form-control" [(ngModel)]="form_filter.time.bias" *ngIf="form_filter.time.time_unit == 0 || form_filter.time.time_unit == 1">
+          <option *ngFor="let item of SEARCH_TIME[form_filter.time.time_unit].lstValue" [value]="item.value">
+            {{ item.value }} {{ item.name | translate }}
+          </option>
+        </select>
+ -->
+      </div>
+
+      <!-- <div class="row" *ngIf="factorSurvey"> -->
+      <div class="row">        
+        <button [disabled]="!this.indexSurvey || !this.factorSurvey" type="button" class="btn btn-primary btn-sm btn-search col-md-2" (click)="analysis()">
+          {{'CORRELATION_ANALYSIS.ANALYSIS'|translate}}
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Analysis content -->
+  <div class="card">
+    <div class="card-body">
+      <!-- Welcome section - Time filter options -->
+      <div class="row">
+        <div class="col-12" *ngIf="!cor_filterData">
+          <table class="table dashboard">
+            <tr>
+              <td class="db-img"><img src="assets/img/dashboard/welcome.png"></td>
+              <td class="db-hello"><h3 class="m-0">{{'DASHBOARD.HELLO' | translate}}!</h3></td>
+            </tr>
+            <tr>
+              <td class="db-content pt-0 pb-0" colspan="2"><h5>{{'CORRELATION_ANALYSIS.DESCRIPTION' | translate}}</h5></td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="col-9" *ngIf="cor_filterData">
+          <correlation [filter]="cor_filterData"></correlation>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
